@@ -1,0 +1,3 @@
+﻿  array_pointer.c
+D:\codi\lern\lerning\array_pointer\array_pointer.c(14,8): warning C4244: функция: преобразование "time_t" в "unsigned int", возможна потеря данных
+  array_pointer.vcxproj -> D:\codi\lern\lerning\array_pointer\x64\Debug\array_pointer.exe
