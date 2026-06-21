@@ -1,3 +1,3 @@
 ﻿  student_db.c
-D:\codi\lern\lerning\student_db\student_db.c(40,13): warning C4244: =: преобразование "double" в "float", возможна потеря данных
+D:\codi\lern\lerning\student_db\student_db.c(48,13): warning C4244: =: преобразование "double" в "float", возможна потеря данных
   student_db.vcxproj -> D:\codi\lern\lerning\student_db\x64\Debug\student_db.exe

@@ -27,21 +27,33 @@ int main(void) {
 						*(new.name + i) = '\0';
 						break;
 					}
+					if (i == 49) {
+						while ((c = getchar()) != '\n' && c != EOF);
+					}
 				}
 			}
+			
 
 
 			printf("введите возраст студента: ");
-			char c_age[4];
-			new.age = atoi(fgets(c_age, 4, stdin));
+			char c_age[5];
+			new.age = atoi(fgets(c_age, 5, stdin));
+			if (c_age[3] != '\n') {
+				while ((c = getchar()) != '\n' && c != EOF);
+			}
+			
 
 			printf("введите среднюю оценку студента: ");
-			char c_ag[5];
-			new.ag = atof(fgets(c_ag, 5, stdin));
+			char c_ag[6];
+			new.ag = atof(fgets(c_ag, 6, stdin));
+			if (c_ag[4] != '\n') {
+				while ((c = getchar()) != '\n' && c != EOF);
+			}
+			
 
 			FILE* file = fopen("students.txt", "a");
 			if (file) {
-				fprintf(file, "%s %d %f\n", new.name, new.age, new.ag);
+				fprintf(file, "%s %d %.2f\n", new.name, new.age, new.ag);
 				fclose(file);
 			}
 			else {
@@ -56,6 +68,7 @@ int main(void) {
 			while (fgets(str, 100, file)) {
 				printf("%s", str);
 			}
+			fclose(file);
 		}
 		else if (choose == '3') {
 			printf("Программа завершена(Женя объелся блох)\n");
