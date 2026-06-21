@@ -21,14 +21,16 @@ int main(void) {
 		if (choose == '1') {
 			student new = { .age = 0, .ag = 0 };
 			printf("введите имя студента: ");
+			int n_found = 0;
 			if (fgets(new.name, 50, stdin) != NULL) {
 				for (int i = 0; *(new.name + i) != '\0'; i++) {
 					if (*(new.name + i) == '\n') {
 						*(new.name + i) = '\0';
+						n_found = 1;
 						break;
 					}
-					if (i == 49) {
-						while ((c = getchar()) != '\n' && c != EOF);
+				if (n_found = 0) {
+					while ((c = getchar()) != '\n' && c != EOF);
 					}
 				}
 			}
@@ -38,7 +40,13 @@ int main(void) {
 			printf("введите возраст студента: ");
 			char c_age[5];
 			new.age = atoi(fgets(c_age, 5, stdin));
-			if (c_age[3] != '\n') {
+			n_found = 0;
+			for (int i = 0; i < 4; i++) {
+				if (c_age[i] == '\n') {
+					n_found = 1;
+				}
+			}
+			if (n_found = 0) {
 				while ((c = getchar()) != '\n' && c != EOF);
 			}
 			
@@ -64,11 +72,14 @@ int main(void) {
 		}
 		else if (choose == '2') {
 			FILE* file = fopen("students.txt", "r");
-			char str[100];
-			while (fgets(str, 100, file)) {
-				printf("%s", str);
+			if (file != NULL) {
+				char str[100];
+				while (fgets(str, 100, file)) {
+					printf("%s", str);
+				}
+				fclose(file);
 			}
-			fclose(file);
+			
 		}
 		else if (choose == '3') {
 			printf("Программа завершена(Женя объелся блох)\n");
