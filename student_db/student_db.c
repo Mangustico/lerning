@@ -1,6 +1,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <locale.h>
+#include <stdlib.h>
 
 typedef struct {
 	char name[50];
@@ -32,25 +33,11 @@ int main(void) {
 
 			printf("введите возраст студента: ");
 			char c_age[4];
-			fgets(c_age, 4, stdin);
-			int len_age = sizeof(c_age) / sizeof(char);
-			for (int i = len_age - 1, grade = 1; i >= 0; i--) {
-				new.age = new.age + ((int)c_age[i] - (int)"0") * grade;
-				grade = grade * 10;
-			}
+			new.age = atoi(fgets(c_age, 4, stdin));
 
 			printf("введите среднюю оценку студента: ");
 			char c_ag[5];
-			fgets(c_ag, 5, stdin);
-			int len_ag = sizeof(c_ag) / sizeof(char);
-			float grade = 1;
-			for (int i = 0; i > len_ag; i++) {
-				if (i != 1) {
-					new.ag = new.ag + ((int)c_ag[i] - (int)"0") * grade;
-					grade = grade * 0.1;
-				}
-
-			}
+			new.ag = atof(fgets(c_ag, 5, stdin));
 
 			FILE* file = fopen("students.txt", "a");
 			if (file) {
@@ -59,7 +46,6 @@ int main(void) {
 			}
 			else {
 				printf("Ошибка подключения файла\n");
-				fclose(file);
 				return 1;
 			}
 
