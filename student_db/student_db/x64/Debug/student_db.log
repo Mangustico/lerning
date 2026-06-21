@@ -1,0 +1,5 @@
+﻿  student_db.c
+D:\codi\lern\lerning\student_db\student_db.c(38,42): warning C4311: приведение типов: усечение указателя из "char [2]" в "int"
+D:\codi\lern\lerning\student_db\student_db.c(49,40): warning C4311: приведение типов: усечение указателя из "char [2]" в "int"
+D:\codi\lern\lerning\student_db\student_db.c(50,20): warning C4244: =: преобразование "double" в "float", возможна потеря данных
+  student_db.vcxproj -> D:\codi\lern\lerning\student_db\x64\Debug\student_db.exe
