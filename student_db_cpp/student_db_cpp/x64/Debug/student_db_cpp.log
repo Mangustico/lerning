@@ -1,0 +1,3 @@
+﻿  student_db.cpp
+D:\codi\lern\lerning\student_db_cpp\student_db.cpp(5,10): warning C4067: непредвиденные лексемы за директивой препроцессора, требуется newline
+LINK : fatal error LNK1168: не удается открыть D:\codi\lern\lerning\student_db_cpp\x64\Debug\student_db_cpp.exe для записи

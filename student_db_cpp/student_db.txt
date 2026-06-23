@@ -1,0 +1,4 @@
+gnomik 14 4
+dima 140 4.56
+zhenya 10 4.72
+mishk 2 100.335
