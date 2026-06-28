@@ -84,6 +84,11 @@ int main(void) {
 			}
 		}
 	}
+
+	if (in_word == 1 and w_len > m_len) {
+		m_word = word;
+	}
+
 	cout << "Amount of words: " << word_count << "\nSentance are " << sent_count << "\nLongest word is: ";
 	for (int i = 0; i < m_word.size(); i++) {
 		cout << m_word[i];
