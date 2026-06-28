@@ -3,7 +3,13 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <algorithm>
+
+#include <iomanip>
+
 using namespace std;
+
+
 
 class student {
 private:
@@ -18,13 +24,13 @@ public:
 		ag = 0;
 	}
 
-	string getName(void) {
+	string getName(void) const{
 		return name;
 	}
-	int getAge(void) {
+	int getAge(void) const {
 		return age;
 	}
-	float getAg(void) {
+	float getAg(void) const {
 		return ag;
 	}
 
@@ -46,7 +52,7 @@ int main(void) {
 	string path = "student_db.txt";
 	int input = 0;
 	while (input != 3) {
-		cout << "Введите команду:\n1 - добавить студента, 2 - вывести базу список студентов, 3 - завершить программу" << endl;
+		cout << "Введите команду:\n1 - добавить студента, 2 - вывести базу список студентов, 3 - завершить программу,\n4 - поиск студента по имени, 5 - сортировка по убыванию ag" << endl;
 		cin >> input;
 		cin.ignore();
 
@@ -84,66 +90,110 @@ int main(void) {
 
 		else if (input == 2) {
 			ifstream fin;
-			fin.open(path, fstream::app);
+			fin.open(path);
 			if (!fin.is_open()) {
-				cout << "Ошибка открытия файла" << endl;
-				return -1;
+				cout << "Файл пустой\n" << endl;
+				continue;
 			}
 			if (db.empty()) {
 				student curr;
 				string str;
-				int act = 1;
-				cout << "\t | Список студентов| ";
-				while (!fin.eof()) {
-					str = "";
-					if (act == 1) {
-						fin >> str;
-						cout << '\n' << str;
-						act = 2;
-						curr.setName(str);
-					}
-					else if (act == 2) {
-						fin >> str;
-						cout << ' ' << str;
-						act = 3;
-						curr.setAge(stoi(str));
-					}
-					else {
-						fin >> str;
-						cout << ' ' << str;
-						act = 1;
-						curr.setAg(stof(str));
-						db.push_back(curr);
-					}
+				int degr;
+				float dot;
+				cout << "\t | Список студентов| \n";
+				while (fin >> str >> degr >> dot) {
+					cout << str << ' ';
+					curr.setName(str);
+					cout << degr << ' ';
+					curr.setAge(degr);
+					cout << dot << '\n';
+					curr.setAg(dot);
 					
+					db.push_back(curr);
 				}
 			}
-			string str;
-			int act = 1;
-			while (!fin.eof()) {
-				str = "";
-				if (act == 1) {
-					fin >> str;
+			else {
+				string str;
+				int degr;
+				float dot;
+				cout << "\t | Список студентов| \n";
+				while (fin >> str >> degr >> dot) {
 					cout << str << ' ';
-					act = 2;
-				}
-				else if (act == 2) {
-					fin >> str;
-					cout << str << ' ';
-					act = 3;
-				}
-				else {
-					fin >> str;
-					cout << str << '\n';
-					act = 1;
+					cout << degr << ' ';
+					cout << dot << '\n';
 				}
 			}
 		}
 		else if (input == 3) {
 			return 0;
 		}
+		else if (input == 4) {
+			cout << "Введите имя студента: " << endl;
+			string search;
+			cin >> search;
+			cin.ignore();
+
+			if (db.empty()) {
+				ifstream fin;
+				fin.open(path);
+				if (!fin.is_open()) {
+					cout << "Ошибка открытия файла" << endl;
+					return -1;
+				}
+				student curr;
+				string str;
+				int degr;
+				float dot;
+				while (fin >> str >> degr >> dot) {
+					curr.setName(str);
+					curr.setAge(degr);
+					curr.setAg(dot);
+
+					db.push_back(curr);
+				}
+			}
+
+			auto it = find_if(db.begin(), db.end(), [search](const student& s) {
+				return s.getName() == search;
+				});
+			if (it != db.end()) {
+				cout << it->getName() << ' ' << it->getAge() << ' ' << fixed << setprecision(2) << it->getAg() << endl;
+			}
+
+		}
+		else if (input == 5) {
+			cout << "Отсортированный список: " << endl;
+
+			if (db.empty()) {
+				ifstream fin;
+				fin.open(path);
+				if (!fin.is_open()) {
+					cout << "Ошибка открытия файла" << endl;
+					return -1;
+				}
+				student curr;
+				string str;
+				int degr;
+				float dot;
+				while (fin >> str >> degr >> dot) {
+					curr.setName(str);
+					curr.setAge(degr);
+					curr.setAg(dot);
+
+					db.push_back(curr);
+				}
+			}
+
+			sort(db.begin(), db.end(), [](const student& a, const student& b) {
+				return a.getAg() > b.getAg();
+				});
+			for (int i = 0; i < db.size(); i++) {
+				cout << db[i].getName() << ' ' << db[i].getAge() << ' ' << db[i].getAg() << endl;
+			}
+		}
 		else {
 			cout << "Команда не распознана\n";
+			input = 3;
 		}
 	}
 	
