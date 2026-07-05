@@ -6,12 +6,14 @@ attempt = 0
 
 res = 1
 command = int(input("Guess the number from 1 to 100: "))
+attempt +=1
 if command < secret_number:
     print("its less than secret number")
 elif command > secret_number:
     print("its bigger than secret number")
 else:
     print("ugadamnright")
+    sys.exit()
 
 while res != 0 and attempt != 15:
     command = int(input("New guess: "))

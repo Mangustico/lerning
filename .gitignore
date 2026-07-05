@@ -11,3 +11,6 @@ Release/
 
 # Игнорируем файлы настроек проекта
 *.vcxproj.user
+
+# ignore pycharm settings
+.idea/
