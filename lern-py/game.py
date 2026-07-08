@@ -10,6 +10,10 @@ print("Guess the number from 1 to 100: ")
 while res != 0 and attempt != 15:
     try:
         command = int(input("Your guess: "))
+    except ValueError:
+        print("Input only integer, try again")
+        continue
+    else:
         attempt += 1
 
         if command < secret_number:
@@ -17,11 +21,7 @@ while res != 0 and attempt != 15:
         elif command > secret_number:
             print("its bigger than secret number")
         elif command == secret_number:
-            res = 0
-    except ValueError:
-        print("Input only integer, try again")
+            sys.exit(f"ouright, the number is {secret_number} and you got it in {attempt} attempts")
 
-if res == 0:
-    sys.exit(f"ouright, the number is {secret_number} and you got it in {attempt} attempts")
 
-else: sys.exit("you lose")
+sys.exit("you lose")
