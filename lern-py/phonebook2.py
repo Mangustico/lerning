@@ -2,8 +2,8 @@ import sys
 import json
 
 try:
-    with open("list.json", 'r') as file:
-        phonebook = json.load(file)
+    with open("list.json", 'r') as f_out:
+        phonebook = json.load(f_out)
 except FileNotFoundError:
     phonebook = {}
 
@@ -11,9 +11,9 @@ print("Commands:")
 command = 0
 while True:
     try:
-        command = int(input("1 - add contact, 2 - found, 3 - show contact list, 4 - delete contact, 5 - exit\n"))
+        command = int(input("1 - add contact, 2 - find, 3 - show contact list, 4 - delete contact, 5 - exit\n"))
     except ValueError:
-        print("Only announced commands is available\n")
+        print("Only announced commands are available\n")
         continue
     else:
         if command == 1:
@@ -21,10 +21,12 @@ while True:
             print("Contact added")
         elif command == 2:
             request_name = str(input("Input contact's name: "))
-            if request_name in phonebook:
-                print(f"Name: {request_name}, number: {phonebook[request_name]}")
+            result = [name for name in phonebook if request_name.lower() in name.lower()]
+            if result:
+                for x in result:
+                    print(f"Name: {x}, number: {phonebook[x]}")
             else:
-                print("There is no contact with this name")
+                print("This contact is not exist")
         elif command == 3:
             for name in phonebook:
                 print(f"Name: {name} , number: {phonebook[name]}")
@@ -33,12 +35,13 @@ while True:
             try:
                 del phonebook[target]
             except KeyError:
-                print("Contact with this name is not exist")
+                print("This contact is not exist")
             else:
                 print("Contact successfully deleted")
         elif command == 5:
-            with open('list.json', 'w') as file:
-                json.dump(phonebook, file, indent=3, separators=(',', ':'))
-            sys.exit("\nProgram is end")
+            with open('list.json', 'w') as f_in:
+                json.dump(phonebook, f_in, indent=3, separators=(',', ':'))
+            print("\nProgram is finished")
+            break
         else:
-            print("Only announced commands is available\n")
+            print("Only announced commands are available\n")
