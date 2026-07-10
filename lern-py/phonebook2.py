@@ -17,7 +17,7 @@ while True:
         continue
     else:
         if command == 1:
-            phonebook[str(input("Input new contact's name: "))] = str(input("New contact's number: "))
+            phonebook[input("Input new contact's name: ")] = input("New contact's number: ")
             print("Contact added")
         elif command == 2:
             request_name = str(input("Input contact's name: "))
@@ -31,7 +31,7 @@ while True:
             for name in phonebook:
                 print(f"Name: {name} , number: {phonebook[name]}")
         elif command == 4:
-            target = str(input("What contact you wanna delete: "))
+            target = input("What contact you wanna delete: ")
             try:
                 del phonebook[target]
             except KeyError:
