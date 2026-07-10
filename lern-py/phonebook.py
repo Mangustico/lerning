@@ -31,6 +31,8 @@ while True:
                 print("Contact with this name is not exist")
             else:
                 print("Contact successfully deleted")
-        else:
+        elif command == 5:
             sys.exit("\nProgram is end")
+        else:
+            print("Only announced commands is available\n")
 
