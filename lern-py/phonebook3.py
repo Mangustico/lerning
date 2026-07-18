@@ -36,6 +36,8 @@ class Phonebook:
         self.contacts = [c for c in self.contacts if c.name != name]
 
     def save(self, file_name):
+        temp_dict = {}
+        for c in self.contacts:
+            temp_dict.update(c.to_dict())
         with open(file_name, "w") as f:
-            for c in self.contacts:
-                json.dump(c, f, indent=3, separators=(',', ':'))
+            json.dump(temp_dict, f, indent=3, separators=(',', ':'))
